@@ -156,5 +156,9 @@ assignment GUI.
 The dialog allows you to sort by name, value, or where the item is currently
 assigned for display.
 
-You can search by name, and you can filter by item quality and by whether the
-item is forbidden.
+You can search by name, and you can filter by:
+
+- item quality
+- whether the item is forbidden
+- whether the item is reachable from the display furniture
+- whether the item is a written work (book or scroll)

@@ -39,10 +39,13 @@ back. You can also toggle an option to automatically load the saved settings
 for new embarks.
 
 When a fort is loaded, you can also go to the Labor -> Standing Orders page.
-You will see a new panel that allows you to save and restore your settings for
-standing orders. You can also toggle whether the saved standing orders are
-automatically restored when you embark on a new fort. This will toggle the
-relevant command in `gui/control-panel` on the Automation -> Autostart page.
+You will see tow new panels. The first allows you to configure how many barrels
+to reserve for use by workshop jobs (instead of being claimed by stockpiles for
+container storage). The second panel allows you to save and restore your
+settings for standing orders. You can also toggle whether the saved standing
+orders are automatically restored when you embark on a new fort. This will
+toggle the relevant command in `gui/control-panel` on the Automation ->
+Autostart page.
 
 There is a similar panel on the Labor -> Work Details page that allows for
 saving and restoring of work detail definitions. Be aware that work detail

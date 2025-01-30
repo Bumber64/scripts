@@ -11,6 +11,11 @@ local emptied = 0
 local in_building = 0
 for _,item in ipairs(df.global.world.items.other.BUCKET) do
     if item.flags.in_job then goto continue end
+    local well = dfhack.items.getHolderBuilding(item)
+    if well and well:getType() == df.building_type.Well and well.well_tag.whole ~= 0 then
+        -- bucket is in a well and the well is actively being used
+        goto continue
+    end
     local emptied_bucket = false
     local freed_in_building = false
     for _,contained_item in ipairs(dfhack.items.getContainedItems(item)) do

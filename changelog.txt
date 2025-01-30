@@ -27,17 +27,88 @@ Template for new versions:
 # Future
 
 ## New Tools
+- `autocheese`: automatically make cheese using barrels that have accumulated sufficient milk
 
 ## New Features
 
 ## Fixes
+- `advtools`: fix dfhack-added conversation options not appearing in the ask whereabouts conversation tree
+- `gui/rename`: fix error when changing the language of a unit's name
 
 ## Misc Improvements
-- `control-panel`: Add realistic-melting tweak to control-panel registry
-
-- `idle-crafting`: also support making shell crafts for workshops with linked input stockpiles
+- `assign-preferences`: new ``--show`` option to display the preferences of the selected unit
+- `pref-adjust`: new ``show`` command to display the preferences of the selected unit
+- `hide-tutorials`: if enabled, also hide tutorial popups for adventure mode
+- `hide-tutorials`: new ``reset`` command that will re-enable popups in the current game
 
 ## Removed
+
+# 51.02-r1
+
+## Fixes
+- `deathcause`: fix error when retrieving the name of a historical figure
+
+# 50.15-r2
+
+## New Tools
+- `fix/stuck-squad`: allow squads and messengers returning from missions to rescue squads that have gotten stuck on the world map
+- `gui/rename`: (reinstated) give new in-game language-based names to anything that can be named (units, governments, fortresses, the world, etc.)
+
+## New Features
+- `gui/settings-manager`: new overlay on the Labor -> Standing Orders tab for configuring the number of barrels to reserve for job use (so you can brew alcohol and not have all your barrels claimed by stockpiles for container storage)
+- `gui/settings-manager`: standing orders save/load now includes the reserved barrels setting
+- `gui/rename`: add overlay to worldgen screen allowing you to rename the world before the new world is saved
+- `gui/rename`: add overlay to the "Prepare carefully" embark screen that transparently fixes a DF bug where you can't give units nicknames or custom professions
+- `gui/notify`: new notification type: save reminder; appears if you have gone more than 15 minutes without saving; click to autosave
+
+## Fixes
+- `fix/dry-buckets`: don't empty buckets for wells that are actively in use
+- `gui/unit-info-viewer`: skill progress bars now show correct XP thresholds for skills past Legendary+5
+- `caravan`: no longer incorrectly identify wood-based plant items and plant-based soaps as being ethically unsuitable for trading with the elves
+- `gui/design`: don't require an extra right click on the first cancel of building area designations
+- `gui/gm-unit`: refresh unit sprite when profession is changed
+
+## Misc Improvements
+- `immortal-cravings`: goblins and other naturally non-eating/non-drinking races will now also satisfy their needs for eating and drinking
+- `caravan`: add filter for written works in display furniture assignment dialog
+- `fix/wildlife`: don't vaporize stuck wildlife that is onscreen -- kill them instead (as if they died from old age)
+- `gui/sitemap`: show primary group affiliation for visitors and invaders (e.g. civilization name or performance troupe)
+
+# 50.15-r1
+
+# 50.14-r2
+
+## New Tools
+- `fix/wildlife`: prevent wildlife from getting stuck when trying to exit the map. This fix needs to be enabled manually in `gui/control-panel` on the Bug Fixes tab since not all players want this bug to be fixed (you can intentionally stall wildlife incursions by trapping wildlife in an enclosed area so they are not caged but still cannot escape).
+- `immortal-cravings`: allow immortals to satisfy their cravings for food and drink
+- `justice`: pardon a criminal's prison sentence
+
+## New Features
+- `force`: add support for a ``Wildlife`` event to allow additional wildlife to enter the map
+
+## Fixes
+- `gui/quickfort`: only print a help blueprint's text once even if the repeat setting is enabled
+- `makeown`: quell any active enemy or conflict relationships with converted creatures
+- `makeown`: halt any hostile jobs the unit may be engaged in, like kidnapping
+- `fix/loyaltycascade`: allow the fix to work on non-dwarven citizens
+- `control-panel`: fix error when setting numeric preferences from the commandline
+- `gui/quickfort`: fix build mode evaluation rules to allow placement of furniture and constructions on tiles with stair shapes or without orthagonal floors
+- `emigration`: save-and-reload no longer resets the emigration cycle timeout
+- `geld`, `ungeld`: save-and-reload no longer loses changes done by `geld` and `ungeld` for units who are historical figures
+- `rejuvenate`: fix error when specifying ``--age`` parameter
+- `gui/notify`: don't classify (peacefully) visiting night creatures as hostile
+- `exportlegends`: ensure historical figure race filter is usable after re-entering legends mode with a different loaded world
+
+## Misc Improvements
+- `idle-crafting`: also support making shell crafts for workshops with linked input stockpiles
+- `gui/gm-editor`: automatically resolve and display names for ``language_name`` fields
+- `fix/stuck-worship`: reduced console output by default. Added ``--verbose`` and ``--quiet`` options.
+- `gui/design`: add dimensions tooltip to vanilla zone painting interface
+- `necronomicon`: new ``--world`` option to list all secret-containing items in the entire world
+- `gui/design`: new ``gui/design.rightclick`` overlay that allows you to cancel out of partially drawn box and minecart designations without canceling completely out of drawing mode
+
+## Removed
+- `modtools/force`: merged into `force`
 
 # 50.13-r5
 

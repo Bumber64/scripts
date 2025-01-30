@@ -233,7 +233,7 @@ end
 -- ---------------------------------------------------------------------------
 function adjust_all_dwarves(skillname)
     for _,v in ipairs(dfhack.units.getCitizens()) do
-        print("Adjusting "..dfhack.df2console(dfhack.TranslateName(dfhack.units.getVisibleName(v))))
+        print("Adjusting "..dfhack.df2console(dfhack.units.getReadableName(v)))
         brainwash_unit(v)
         elevate_attributes(v)
         rejuvenate.rejuvenate(v, true)

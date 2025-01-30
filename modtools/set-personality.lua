@@ -243,7 +243,7 @@ function randomTraitValue()
 end
 
 function printUnitTraits(unit)
-  print("Traits of " .. dfhack.TranslateName(unit.name) .. ":")
+  print("Traits of " .. dfhack.df2console(dfhack.units.getReadableName(unit)) .. ":")
   for id, name in ipairs(df.personality_facet_type) do
     if name ~= 'NONE' then
       local baseValue = getUnitTraitBase(unit, id)

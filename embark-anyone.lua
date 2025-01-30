@@ -68,7 +68,7 @@ function embarkAnyone()
 
       -- Find the civ's name, or come up with one
       if civ.name.has_name then
-         label = dfhack.TranslateName(civ.name, true) .. "\n"
+         label = dfhack.translation.translateName(civ.name, true) .. "\n"
       else
          label = "Unnamed " ..
             dfhack.units.getRaceReadableNameById(civ.race) ..

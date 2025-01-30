@@ -84,7 +84,7 @@ local function main(args)
         table.insert(units, dfhack.gui.getSelectedUnit(true) or qerror("Please select a unit in the UI."))
     end
     for _, u in ipairs(units) do
-        rejuvenate(u, false, args.force, args['dry-run'], args.age)
+        rejuvenate(u, false, args.force, args['dry-run'], tonumber(args.age))
     end
 end
 

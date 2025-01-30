@@ -213,7 +213,7 @@ ConfirmSpec{
     message='Are you sure you want to delete this route?',
     intercept_keys='_MOUSE_L',
     context='dwarfmode/Hauling',
-    predicate=function() return mi.current_hover == df.main_hover_instruction.RouteRemove end,
+    predicate=function() return mi.current_hover == df.main_hover_instruction.HAULING_REMOVE_ROUTE end,
     pausable=true,
 }
 
@@ -223,7 +223,7 @@ ConfirmSpec{
     message='Are you sure you want to delete this stop?',
     intercept_keys='_MOUSE_L',
     context='dwarfmode/Hauling',
-    predicate=function() return mi.current_hover == df.main_hover_instruction.StopRemove end,
+    predicate=function() return mi.current_hover == df.main_hover_instruction.HAULING_REMOVE_STOP end,
     pausable=true,
 }
 
@@ -234,7 +234,7 @@ ConfirmSpec{
     intercept_keys='_MOUSE_L',
     context='dwarfmode/ViewSheets/BUILDING/TradeDepot',
     predicate=function()
-        return mi.current_hover == df.main_hover_instruction.BuildingRemove and has_caravans()
+        return mi.current_hover == df.main_hover_instruction.BUILDING_SHEET_REMOVE and has_caravans()
     end,
 }
 
@@ -244,7 +244,7 @@ ConfirmSpec{
     message='Are you sure you want to disband this squad?',
     intercept_keys='_MOUSE_L',
     context='dwarfmode/Squads',
-    predicate=function() return mi.current_hover == df.main_hover_instruction.SquadDisband end,
+    predicate=function() return mi.current_hover == df.main_hover_instruction.SQUAD_DISBAND end,
     pausable=true,
 }
 
@@ -330,7 +330,7 @@ ConfirmSpec{
     -- sticks out the left side so it can move with the panel
     -- when the screen is resized too narrow
     intercept_frame={r=32, t=19, w=101, b=3},
-    context='dwarfmode/SquadEquipment/Customizing/Default',
+    context='dwarfmode/Squads/Equipment/Customizing/Default',
     predicate=function(keys, mouse_offset)
         if keys._MOUSE_R then
             return uniform_has_changes()
@@ -424,7 +424,7 @@ ConfirmSpec{
             selected_pos = scroll_pos + (y - first_portrait_rect.y1) // 3
         end
         local unit = dfhack.gui.getWidget(scroll_rows, selected_pos, 0).u
-        selected_convict_name = dfhack.TranslateName(dfhack.units.getVisibleName(unit))
+        selected_convict_name = dfhack.translation.translateName(dfhack.units.getVisibleName(unit))
         if selected_convict_name == '' then
             selected_convict_name = 'this creature'
         end
@@ -438,7 +438,7 @@ ConfirmSpec{
     message='Are you sure you want to remove this manager order?',
     intercept_keys='_MOUSE_L',
     context='dwarfmode/Info/WORK_ORDERS/Default',
-    predicate=function() return mi.current_hover == df.main_hover_instruction.ManagerOrderRemove end,
+    predicate=function() return mi.current_hover == df.main_hover_instruction.WORK_ORDERS_REMOVE end,
     pausable=true,
 }
 
@@ -460,8 +460,8 @@ ConfirmSpec{
     intercept_keys='_MOUSE_L',
     context='dwarfmode/Burrow',
     predicate=function()
-        return mi.current_hover == df.main_hover_instruction.BurrowRemove or
-            mi.current_hover == df.main_hover_instruction.BurrowRemovePaint
+        return mi.current_hover == df.main_hover_instruction.BURROW_REMOVE_EXISTING or
+            mi.current_hover == df.main_hover_instruction.BURROW_PAINT_REMOVE
     end,
     pausable=true,
 }
@@ -472,7 +472,7 @@ ConfirmSpec{
     message='Are you sure you want to remove this stockpile?',
     intercept_keys='_MOUSE_L',
     context='dwarfmode/Stockpile',
-    predicate=function() return mi.current_hover == df.main_hover_instruction.StockpileRemove end,
+    predicate=function() return mi.current_hover == df.main_hover_instruction.STOCKPILE_REMOVE_EXISTING end,
     pausable=true,
 }
 

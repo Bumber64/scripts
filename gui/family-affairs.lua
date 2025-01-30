@@ -145,7 +145,8 @@ local function set_spouse(unit1, unit2, accept_fn)
         add_hf_link(df.histfig_hf_link_spousest, unit1.hist_figure_id, unit2.hist_figure_id)
         add_hf_link(df.histfig_hf_link_spousest, unit2.hist_figure_id, unit1.hist_figure_id)
         dfhack.gui.showAutoAnnouncement(df.announcement_type.MARRIAGE, xyz2pos(dfhack.units.getPosition(unit1)),
-            ('%s and %s have married!'):format(dfhack.TranslateName(unit1.name), dfhack.TranslateName(unit2.name)),
+            ('%s and %s have married!'):format(dfhack.translation.translateName(unit1.name),
+                dfhack.translation.translateName(unit2.name)),
             COLOR_LIGHTMAGENTA)
         accept_fn()
     end

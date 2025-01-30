@@ -89,7 +89,7 @@ local function do_filter(scr, filter_str, full_refresh)
             hfid_to_race[hfid] = hf and hf.race or -1
             hfid_to_name[hfid] = hf and
                 dfhack.toSearchNormalized(
-                    ('%s %s'):format(dfhack.TranslateName(hf.name, false), dfhack.TranslateName(hf.name, true))) or ''
+                    ('%s %s'):format(dfhack.translation.translateName(hf.name, false), dfhack.translation.translateName(hf.name, true))) or ''
         end
         if cur_race >= 0 and hfid_to_race[hfid] ~= cur_race then
             scr.histfigs_filtered:erase(idx)

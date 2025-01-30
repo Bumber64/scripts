@@ -494,7 +494,7 @@ function CompanionUi:onRenderBody( dc)
         else
             dc:pen(COLOR_GREY)
         end
-        dc:newline(1):string(string.char(k+char_a)..". "):string(dfhack.TranslateName(v.name));
+        dc:newline(1):string(string.char(k+char_a)..". "):string(dfhack.translation.translateName(v.name));
     end
     dc:pen(COLOR_GREY)
     local w,h=self:getWindowSize()

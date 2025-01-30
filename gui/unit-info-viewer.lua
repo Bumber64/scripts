@@ -180,7 +180,7 @@ local function get_name_chunk(unit)
 end
 
 local function get_translated_name_chunk(unit)
-    local tname = dfhack.TranslateName(dfhack.units.getVisibleName(unit), true)
+    local tname = dfhack.translation.translateName(dfhack.units.getVisibleName(unit), true)
     if #tname == 0 then return '' end
     return ('"%s"'):format(tname)
 end

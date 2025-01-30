@@ -2,6 +2,7 @@
 
 local dialogs = require('gui.dialogs')
 local predicates = reqscript('internal/caravan/predicates')
+local utils = require('utils')
 local widgets = require('gui.widgets')
 
 CH_UP = string.char(30)
@@ -625,35 +626,80 @@ function scan_banned(item, risky_items)
     return false, false
 end
 
-local function is_wood_based(mat_type, mat_index)
-    if mat_type == df.builtin_mats.LYE or
-        mat_type == df.builtin_mats.GLASS_CLEAR or
-        mat_type == df.builtin_mats.GLASS_CRYSTAL or
-        (mat_type == df.builtin_mats.COAL and mat_index == 1) or
-        mat_type == df.builtin_mats.POTASH or
-        mat_type == df.builtin_mats.ASH or
-        mat_type == df.builtin_mats.PEARLASH
-    then
+local function is_wood_based_material(mat_type, mat_index)
+    if mat_type == df.builtin_mats.GLASS_CLEAR or mat_type == df.builtin_mats.GLASS_CRYSTAL then
         return true
     end
 
     local mi = dfhack.matinfo.decode(mat_type, mat_index)
-    return mi and mi.material and
+    return mi and mi.mode == 'plant' and mi.material and
         (mi.material.flags.WOOD or
-         mi.material.flags.STRUCTURAL_PLANT_MAT or
-         mi.material.flags.SOAP)
+         mi.material.flags.STRUCTURAL_PLANT_MAT)
+end
+
+local item_types_never_wood = utils.invert{
+    df.item_type.SMALLGEM,
+    df.item_type.BLOCKS,
+    df.item_type.ROUGH,
+    df.item_type.BOULDER,
+    df.item_type.CORPSE,
+    df.item_type.CORPSEPIECE,
+    df.item_type.REMAINS,
+    df.item_type.MEAT,
+    df.item_type.FISH,
+    df.item_type.FISH_RAW,
+    df.item_type.VERMIN,
+    df.item_type.PET,
+    df.item_type.SEEDS,
+    df.item_type.PLANT,
+    df.item_type.SKIN_TANNED,
+    df.item_type.PLANT_GROWTH,
+    df.item_type.DRINK,
+    df.item_type.CHEESE,
+    df.item_type.FOOD,
+    df.item_type.COIN,
+    df.item_type.GLOB,
+    df.item_type.ROCK,
+    df.item_type.EGG,
+}
+
+local function is_wood_based_item(item)
+    local itype = item:getType()
+
+    if item_types_never_wood[itype] then return false end
+
+    local mat_type, mat_index = item:getMaterial(), item:getMaterialIndex()
+
+    if itype == df.item_type.BAR then
+        if mat_type == df.builtin_mats.POTASH or
+            mat_type == df.builtin_mats.ASH or
+            mat_type == df.builtin_mats.PEARLASH or
+            (mat_type == df.builtin_mats.COAL and mat_index == 1)
+        then
+            return true
+        end
+        local mi = dfhack.matinfo.decode(mat_type, mat_index)
+        return mi and mi.mode == 'creature'
+    elseif itype == df.item_type.LIQUID_MISC then
+        return mat_type == df.builtin_mats.LYE
+    elseif itype == df.item_type.WEAPON then
+        local mi = dfhack.matinfo.decode(mat_type, mat_index)
+        return mi and mi.mode == 'inorganic' and mi.material and not mi.material.flags.IS_METAL
+    end
+
+    return is_wood_based_material(mat_type, mat_index)
 end
 
 function has_wood(item)
     if item.flags2.grown then return false end
 
-    if is_wood_based(item:getMaterial(), item:getMaterialIndex()) then
+    if is_wood_based_item(item) then
         return true
     end
 
     if item:hasImprovements() then
         for _, imp in ipairs(item.improvements) do
-            if is_wood_based(imp.mat_type, imp.mat_index) then
+            if is_wood_based_material(imp.mat_type, imp.mat_index) then
                 return true
             end
         end

@@ -214,7 +214,7 @@ function main(...)
 
   -- View
   if args.view then
-    print("Orientation of " .. dfhack.TranslateName(unit.name) .. ":")
+    print("Orientation of " .. dfhack.df2console(dfhack.units.getReadableName(unit)) .. ":")
     print("Male: " .. getInterestString(getInterest(unit, "male")))
     print("Female: " .. getInterestString(getInterest(unit, "female")))
     return
