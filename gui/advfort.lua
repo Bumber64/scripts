@@ -69,14 +69,15 @@ build_filter.HUMANish={
 --[[ FIXME: maybe let player select which to disable?]]
 for k,v in ipairs(df.global.plotinfo.economic_stone) do df.global.plotinfo.economic_stone[k]=0 end
 
-local gui = require 'gui'
-local wid=require 'gui.widgets'
-local dialog=require 'gui.dialogs'
-local buildings=require 'dfhack.buildings'
-local bdialog=require 'gui.buildings'
-local workshopJobs=require 'dfhack.workshops'
-local utils=require 'utils'
-local gscript=require 'gui.script'
+local gui = require('gui')
+local guidm = require('gui.dwarfmode')
+local wid = require('gui.widgets')
+local dialog = require('gui.dialogs')
+local buildings = require('dfhack.buildings')
+local bdialog = require('gui.buildings')
+local workshopJobs = require('dfhack.workshops')
+local utils = require('utils')
+local gscript = require('gui.script')
 
 local advfort_items = reqscript('internal/advfort/advfort_items')
 
@@ -1694,8 +1695,9 @@ function usetool:fieldInput(keys)
                 screen=self}
 
             if code=="SELECT" then --do job in the distance, TODO: check if you can still cheat-mine (and co.) remotely
-                if df.global.cursor.x~=-30000 then
-                    state.pos={x=df.global.cursor.x,y=df.global.cursor.y,z=df.global.cursor.z}
+                local cursor=guidm.getCursorPos()
+                if cursor then
+                    state.pos=cursor
                 else
                     break
                 end
@@ -1747,7 +1749,7 @@ function usetool:onInput(keys)
     local adv=dfhack.world.getAdventurer()
 
     if keys.LEAVESCREEN  then
-        if df.global.cursor.x~=-30000 then --if not poiting at anything
+        if guidm.getCursorPos() then --if not poiting at anything
             self:sendInputToParent("LEAVESCREEN") --leave poiting
         else
             self:dismiss() --leave the adv-tools all together
