@@ -226,8 +226,7 @@ function getSelectionData()
         if selection == nil and pos then
             print("searching for a job at the cursor")
             for _link, job in utils.listpairs(df.global.world.jobs.list) do
-                local jp = job.pos
-                if jp.x == pos.x and jp.y == pos.y and jp.z == pos.z then
+                if same_xyz(job.pos, pos) then
                     if selection == nil then
                         selection = {}
                     end
