@@ -27,6 +27,7 @@ Examples::
 
 ]====]
 
+local guidm = require('gui.dwarfmode')
 local args={...}
 
 if args[1] == '?' or args[1] == 'help' then
@@ -34,7 +35,7 @@ if args[1] == '?' or args[1] == 'help' then
     return
 end
 
-local pos = copyall(df.global.cursor)
+local pos = guidm.getCursorPos()
 local size = tonumber(args[1])
 if size == nil or size < 1 then size = 1 end
 
@@ -49,7 +50,7 @@ for index, feature in ipairs(df.global.world.features.map_features) do
     end
 end
 
-if pos.x==-30000 then
+if not pos then
     qerror("Select a location by placing the cursor")
 end
 local x = 0
