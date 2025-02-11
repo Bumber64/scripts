@@ -185,7 +185,7 @@ end
 function GetItemsAtPos(pos)
     local ret={}
     for k,v in pairs(df.global.world.items.other.IN_PLAY) do
-        if v.flags.on_ground and v.pos.x==pos.x and v.pos.y==pos.y and v.pos.z==pos.z then
+        if v.flags.on_ground and same_xyz(v.pos, pos) then
             table.insert(ret,v)
         end
     end
@@ -227,7 +227,7 @@ function move_unit( unit,tx,ty,tz ) --copied from http/commands.lua with minor m
     unit.idle_area_threshold=0
     unit.follow_distance=50
     --invalidate old path
-    unit.path.dest={x=unit.idle_area.x,y=unit.idle_area.y,z=unit.idle_area.z}
+    unit.path.dest=copyall(unit.idle_area)
     unit.path.goal=df.unit_path_goal.SeekStation
     unit.path.path.x:resize(0)
     unit.path.path.y:resize(0)
