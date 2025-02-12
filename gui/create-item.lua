@@ -1,6 +1,6 @@
 -- A gui-based item creation script.
 -- author Putnam
--- edited by expwnent, Bumber64
+-- edited by expwnent
 
 local argparse = require('argparse')
 local createitem = reqscript('modtools/create-item')
