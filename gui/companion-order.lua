@@ -47,7 +47,7 @@ function DoesHaveSubtype(item)
     return true
 end
 function CheckCursor(p)
-    if not cursor then
+    if not p then
         dlg.showMessage(
                 'Companion orders',
                 'You must have a cursor on some tile!', COLOR_LIGHTRED
