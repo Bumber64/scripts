@@ -35,12 +35,14 @@ Template for new versions:
 - `advtools`: new ``advtools.fastcombat`` overlay (enabled by default)  allows you to skip combat animations and the announcement "More" button by mashing the movement keys
 
 ## Fixes
+- `position`: support for adv mode look cursor
 
 ## Misc Improvements
 - `hide-tutorials`: handle tutorial popups for adventure mode
 - `hide-tutorials`: new ``reset`` command that will re-enable popups in the current game (in case you hid them all and now want them back)
 - `gui/notify`: moody dwarf notification turns red when they can't reach workshop or items
 - `gui/confirm`: in the delete manager order confirmation dialog, show a description of which order you have selected to delete
+- `position`: display both adventurer and site pos simultaneously. Display map block pos+offset of selected tile.
 
 ## Removed
 
