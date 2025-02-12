@@ -24,7 +24,7 @@ if not df.building_tablest:is_instance(build) then
     error("No table found at cursor")
 end
 for k,v in pairs(df.global.world.items.other.IN_PLAY) do
-    if v.flags.on_ground and pos.x==v.pos.x and pos.y==v.pos.y and pos.z==v.pos.z then
+    if v.flags.on_ground and same_xyz(v.pos, pos) then
         table.insert(items,v)
         if not doall then
             break
