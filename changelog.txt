@@ -38,10 +38,9 @@ Template for new versions:
 
 ## Fixes
 - `position`: support for adv mode look cursor
-- `devel/query`, `devel/tree-info`, `hfs-pit`, `colonies`: now function in adventure mode
+- `devel/query`, `devel/tree-info`, `hfs-pit`, `colonies`, `toggle-kbd-cursor`: now function in adventure mode
 - `hfs-pit`: fix up tiletypes of pit walls, better placement of stairs (w/r/t eerie pits and ramp tops)
 - `modtools/create-item`: ``hackWish`` now respects ``opts.pos`` and will spawn items there if provided
-- `toggle-kbd-cursor`: exclude adventure mode because it isn't compatible
 
 ## Misc Improvements
 - `hide-tutorials`: handle tutorial popups for adventure mode
