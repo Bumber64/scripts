@@ -15,7 +15,8 @@ will be displayed depending on the situation:
 ==========  ==========
 Coord Type  Meaning
 ==========  ==========
-Local       Tile coordinates, available when not fast traveling.
+Local       Tile coordinates, available when not fast traveling or sleeping.
+            Your target's local coordinates are displayed when nearby.
 Travel      The smallest step when traveling the world, equivalent to 16 tiles.
 Region      World map tiles, corresponding to world width and height.
             Equivalent to 48 travel tiles or 768 local tiles.
