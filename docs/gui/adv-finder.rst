@@ -24,7 +24,7 @@ Region      World map tiles, corresponding to world width and height.
 
 For Travel and Region coordinates, the Z component will only be displayed if it
 can be determined. This represents an underground layer depth, so the surface
-is represented by ``Z0`` and the first cavern layer is ``Z-1``.
+is indicated by ``Z0`` and the first cavern layer is ``Z-1``.
 
 A compass and relative coordinates will also be displayed. The relative
 coordinate display uses the most precise ones shared between you and your
