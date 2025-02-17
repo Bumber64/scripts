@@ -305,10 +305,12 @@ local function hf_text(hf, hf_data) --Text for target info panel
     str = get_race_name(hf)
     insert_txt(txt, str ~= '' and str or 'Force')
 
+    local eternal --Can't reasonably die
     if hf.died_year ~= -1 then
         insert_txt(txt, {text='DEAD', pen=COLOR_RED})
     elseif hf.old_year == -1 and hf_data and hf_data.loc_type == LType.None then
-        insert_txt(txt, {text='ETERNAL', pen=COLOR_LIGHTBLUE}) --Can't die
+        eternal = true
+        insert_txt(txt, {text='ETERNAL', pen=COLOR_LIGHTBLUE})
     else
         insert_txt(txt, {text='ALIVE', pen=COLOR_LIGHTGREEN})
     end
@@ -319,7 +321,11 @@ local function hf_text(hf, hf_data) --Text for target info panel
     end
 
     if hf_data.loc_type == LType.None then --Everywhere or nowhere
-        insert_txt(txt, {text='Transcendent', pen=COLOR_YELLOW})
+        if eternal then
+            insert_txt(txt, {text='Transcendent', pen=COLOR_YELLOW})
+        else
+            insert_txt(txt, {text='Missing', pen=COLOR_MAGENTA})
+        end
     elseif hf_data.loc_type == LType.Local then
         insert_txt(txt, 'Nearby')
         insert_txt(txt, region_pos_text(hf_data.r_pos))
