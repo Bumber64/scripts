@@ -333,7 +333,7 @@ local function hf_text(hf, hf_data) --Text for target info panel
         insert_txt(txt, local_pos_text(hf_data.pos))
     else
         if hf_data.loc_type == LType.Site then
-            insert_txt(txt, transName(hf_data.site.name, true))
+            insert_txt(txt, 'At '..transName(hf_data.site.name, true))
         elseif hf_data.loc_type == LType.Army then
             insert_txt(txt, 'Traveling')
         elseif hf_data.loc_type == LType.Wild then
