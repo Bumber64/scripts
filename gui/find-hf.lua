@@ -1,4 +1,4 @@
--- Find and track historical figures in adventurer mode
+-- Find and track historical figures
 
 local gui = require('gui')
 local widgets = require('gui.widgets')
@@ -10,11 +10,11 @@ local LType = {None = 0, Local = 1, Wild = 2, Under = 3, Site = 4, Army = 5} --L
 
 -- Fns for getting adventurer data --
 
-local function region_from_global(g_pos) --Convert to region coords
-    return g_pos and {x = g_pos.x//48, y = g_pos.y//48} or nil
+local function region_from_travel(t_pos) --Convert to region coords
+    return t_pos and {x = t_pos.x//48, y = t_pos.y//48} or nil
 end
 
-local function global_from_local(pos) --Calc global coord from map pos
+local function travel_from_local(pos) --Calc travel coord from map pos
     return pos and {x = world.map.region_x*3 + pos.x//16, y = world.map.region_y*3 + pos.y//16} or nil
 end
 
@@ -23,12 +23,12 @@ local function get_adv_data() --All the coords we can get
     if not adv then --Army exists when unit doesn't
         local army = df.army.find(df.global.adventure.player_army_id)
         if army then --Should always exist if unit doesn't
-            return {r_pos = region_from_global(army.pos), g_pos = army.pos}
+            return {r_pos = region_from_travel(army.pos), t_pos = army.pos}
         end
         return nil --Error
     end
     local mmd = world.world_data.midmap_data
-    return {r_pos = {x = mmd.adv_region_x, y = mmd.adv_region_y}, g_pos = global_from_local(adv.pos), pos = adv.pos}
+    return {r_pos = {x = mmd.adv_region_x, y = mmd.adv_region_y}, t_pos = travel_from_local(adv.pos), pos = adv.pos}
 end
 
 -- Fns for getting target data --
@@ -44,39 +44,39 @@ local function get_hf_data(hf) --Whereabouts data and coords
 
     local unit = df.unit.find(hf.unit_id)
     if unit then --Unit is nearby
-        local g_pos = global_from_local(unit.pos)
-        return {loc_type = LType.Local, r_pos = region_from_global(g_pos), g_pos = g_pos, pos = unit.pos}
+        local t_pos = travel_from_local(unit.pos)
+        return {loc_type = LType.Local, r_pos = region_from_travel(t_pos), t_pos = t_pos, pos = unit.pos}
     end
 
-    local g_pos = where.abs_smm_x ~= -1 and {x = where.abs_smm_x, y = where.abs_smm_y} or nil
+    local t_pos = where.abs_smm_x ~= -1 and {x = where.abs_smm_x, y = where.abs_smm_y} or nil
     if where.subregion_id ~= -1 then --Surface region
-        if g_pos then
-            g_pos.z = 0 --Must be surface
+        if t_pos then
+            t_pos.z = 0 --Must be surface
         end
-        return {loc_type = LType.Wild, r_pos = region_from_global(g_pos), g_pos = g_pos}
+        return {loc_type = LType.Wild, r_pos = region_from_travel(t_pos), t_pos = t_pos}
     end
 
     if where.feature_layer_id ~= -1 then --Cavern layer
-        if g_pos then
+        if t_pos then
             local layer = df.world_underground_region.find(where.feature_layer_id)
-            g_pos.z = layer and layer.layer_depth or nil
+            t_pos.z = layer and layer.layer_depth or nil
         end
-        return {loc_type = LType.Under, r_pos = region_from_global(g_pos), g_pos = g_pos}
+        return {loc_type = LType.Under, r_pos = region_from_travel(t_pos), t_pos = t_pos}
     end
 
     if where.site_id ~= -1 then --Site
         local site = df.world_site.find(where.site_id)
         if site then
-            if g_pos then
-                g_pos.z = site.min_depth == site.max_depth and site.min_depth or nil
+            if t_pos then
+                t_pos.z = site.min_depth == site.max_depth and site.min_depth or nil
             end
-            return {loc_type = LType.Site, site = site, r_pos = region_from_global(g_pos), g_pos = g_pos}
+            return {loc_type = LType.Site, site = site, r_pos = region_from_travel(t_pos), t_pos = t_pos}
         end
     end
 
     local army = df.army.find(where.army_id)
     if army then
-        return {loc_type = LType.Army, r_pos = region_from_global(army.pos), g_pos = army.pos}
+        return {loc_type = LType.Army, r_pos = region_from_travel(army.pos), t_pos = army.pos}
     end
     return nil --Unhandled, insufficient data
 end
@@ -230,16 +230,16 @@ local function relative_txt(adv_data, hf_data) --Relative coords and compass
         insert_txt(txt, 'target (local):')
         insert_txt(txt, compass(dx, dy))
         insert_txt(txt, ('X%+d Y%+d Z%+d'):format(dx, dy, hf_data.pos.z - adv_data.pos.z))
-    elseif hf_data.g_pos and adv_data.g_pos then --Use global
-        local dx = hf_data.g_pos.x - adv_data.g_pos.x
-        local dy = hf_data.g_pos.y - adv_data.g_pos.y
+    elseif hf_data.t_pos and adv_data.t_pos then --Use travel
+        local dx = hf_data.t_pos.x - adv_data.t_pos.x
+        local dy = hf_data.t_pos.y - adv_data.t_pos.y
         table.insert(txt, NEWLINE)
-        insert_txt(txt, 'target (global):')
+        insert_txt(txt, 'target (travel):')
         insert_txt(txt, compass(dx, dy))
 
         local s = ('X%+d Y%+d'):format(dx, dy)
-        if hf_data.g_pos.z and adv_data.g_pos.z then --Use Z if we have it
-            s = s..(' Z%+d'):format(adv_data.g_pos.z - hf_data.g_pos.z) --Negate because it's depth
+        if hf_data.t_pos.z and adv_data.t_pos.z then --Use Z if we have it
+            s = s..(' Z%+d'):format(adv_data.t_pos.z - hf_data.t_pos.z) --Negate because it's depth
         end
         insert_txt(txt, s)
     elseif hf_data.r_pos and adv_data.r_pos then --Use region
@@ -260,9 +260,9 @@ local function region_pos_text(r_pos)
 
 end
 
-local function global_pos_text(g_pos)
-    if g_pos then --Use Z if we have it. Negate because it's depth
-        return 'global: X'..g_pos.x..' Y'..g_pos.y..(g_pos.z and ' Z'..-g_pos.z or '')
+local function travel_pos_text(t_pos)
+    if t_pos then --Use Z if we have it. Negate because it's depth
+        return 'travel: X'..t_pos.x..' Y'..t_pos.y..(t_pos.z and ' Z'..-t_pos.z or '')
     end
 end
 
@@ -276,9 +276,9 @@ local function adv_txt(adv_data, hf_data) --Text for adv info panel
     if not adv_data then
         return 'Error'
     end
-    local txt = {'You'} --You, region, global, local, relative
+    local txt = {'You'} --You, region, travel, local, relative
     insert_txt(txt, region_pos_text(adv_data.r_pos))
-    insert_txt(txt, global_pos_text(adv_data.g_pos))
+    insert_txt(txt, travel_pos_text(adv_data.t_pos))
     insert_txt(txt, local_pos_text(adv_data.pos))
 
     for _,str in ipairs(relative_txt(adv_data, hf_data)) do
@@ -293,7 +293,7 @@ local function hf_text(hf, hf_data) --Text for target info panel
     if not hf then --No target
         return ''
     end
-    local txt = {} --Native, [translated], race, alive, location, [region,] [global,] [local]
+    local txt = {} --Native, [translated], race, alive, location, [region,] [travel,] [local]
 
     local str = transName(hf.name, false)
     if str == '' then
@@ -323,7 +323,7 @@ local function hf_text(hf, hf_data) --Text for target info panel
     elseif hf_data.loc_type == LType.Local then
         insert_txt(txt, 'Nearby')
         insert_txt(txt, region_pos_text(hf_data.r_pos))
-        insert_txt(txt, global_pos_text(hf_data.g_pos))
+        insert_txt(txt, travel_pos_text(hf_data.t_pos))
         insert_txt(txt, local_pos_text(hf_data.pos))
     else
         if hf_data.loc_type == LType.Site then
@@ -338,7 +338,7 @@ local function hf_text(hf, hf_data) --Text for target info panel
             insert_txt(txt, 'Error')
         end
         insert_txt(txt, region_pos_text(hf_data.r_pos))
-        insert_txt(txt, global_pos_text(hf_data.g_pos))
+        insert_txt(txt, travel_pos_text(hf_data.t_pos))
     end
     return txt
 end
