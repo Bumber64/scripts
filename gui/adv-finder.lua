@@ -257,7 +257,6 @@ local function region_pos_text(r_pos)
     if r_pos then
         return ('region: X%d Y%d'):format(r_pos.x, r_pos.x)
     end
-
 end
 
 local function travel_pos_text(t_pos)
