@@ -68,17 +68,44 @@ None           The target's location isn't defined in the game world.
 
 Dead figures generally just can't be encountered, and they take their items
 with them if they weren't separated properly by worldgen. The coord given is
-usually a death or hypothetical burial location, but the corpse isn't
-guaranteed to exist. Generally, Wilderness and Underground locations only
-have any coords if you left something there in adventure mode. Anything
-lost during worldgen or a fort mode mission likely can't be located. Anything
-in a site is usually a safe bet, but sometimes items won't load. (Fort
-missions can be used to acquire these for later retrieval.) Traveling targets
-are always valid.
+usually a death or abstract burial location, but the corpse isn't guaranteed to
+exist. Generally, wilderness and underground locations only have coords you
+left something there in adventure mode. Anything lost during worldgen or a fort
+mode mission likely can't be located. Anything in a site is usually a safe bet,
+but sometimes items won't load. (Fort missions can be used to acquire these for
+later retrieval, however.) Traveling targets are always valid.
 
 Usage
 -----
 
 ::
 
-    gui/adv-finder
+    gui/adv-finder [<options>]
+
+Examples
+--------
+
+``gui/adv-finder``
+    Open the finder window (unless already open). Target will be blank on first
+    use, but maintained on future invocations.
+``gui/adv-finder --histfig 1234``
+    Track the historical figure with ID #1234. Finder will be opened if not
+    already.
+``gui/adv-finder -h -1 -a -1``
+    Clear any target so it's just the adventurer. Finder will be opened if not
+    already.
+``gui/adv-finder --debug``
+    Display selected target IDs in the finder window title bar. Finder will be
+    opened if not already. Setting isn't saved, so it can be disabled by
+    invoking ``gui/adv-finder`` again without the option.
+
+Options
+-------
+
+``-h``, ``--histfig <id>``
+    Set the target to the historical figure with the given ID.
+``-a``, ``--artifact <id>``
+    Set the target to the artifact record with the given ID. Not an item ID!
+``-d``, ``--debug``
+    Display selected target IDs in the finder window title bar. Doesn't persist
+    between invocations.
