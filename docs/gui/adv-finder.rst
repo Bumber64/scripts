@@ -15,8 +15,8 @@ close the target search window first. A second dismissal will close the
 finder window, but target settings will be preserved until the world is
 unloaded.
 
-Your coordinates will be kept up to date alongside your target's. There are two
-types of coordinates, and they will be displayed as well as they can be
+Your coordinates will be kept up to date alongside your target's. There are
+two types of coordinates, and they will be displayed as long as they can be
 determined.
 
 ==========  ==========
