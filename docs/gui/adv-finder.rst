@@ -67,7 +67,7 @@ None           The target's location isn't defined in the game world.
                because nothing can touch them.
 =============  ==========
 
-Dead figures generally just can't be encountered, and they take their items
+Dead figures generally can't be encountered at all, and they take their items
 with them if they weren't separated properly by worldgen. The coord given is
 usually a death or abstract burial location, but the corpse isn't guaranteed to
 exist. Generally, wilderness and underground locations only have coords you
