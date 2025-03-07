@@ -9,10 +9,11 @@ A real-time tracker for historical figures and artifacts. Select a target by
 clicking the settings icon [☼] and selecting an entry from the list in the
 relevant tab. The list can be filtered by search string, as well as by
 excluding dead figures (displayed in red text). Artifacts can exclude books,
-and the "dead" filter excludes artifacts held by dead figures (which are
+and the "dead" option excludes artifacts held by dead figures (which are
 generally unrecoverable). Dismissing the screen (e.g., right-click) will
-close the target window first. A second dismissal will close the finder,
-but target settings will be preserved unless the world is unloaded.
+close the target search window first. A second dismissal will close the
+finder window, but target settings will be preserved until the world is
+unloaded.
 
 Your coordinates will be kept up to date alongside your target's. There are two
 types of coordinates, and they will be displayed as well as they can be
