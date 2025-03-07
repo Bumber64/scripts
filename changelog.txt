@@ -31,6 +31,7 @@ Template for new versions:
 - `autocheese`: automatically make cheese using barrels that have accumulated sufficient milk
 - `gui/spectate`: interactive UI for configuring new `spectate` features
 - `gui/notes`: UI for adding and managing notes attached to tiles on the map
+- `gui/adv-finder`: UI for tracking historical figures and artifacts in adventure mode
 
 ## New Features
 - `advtools`: new ``advtools.fastcombat`` overlay (enabled by default)  allows you to skip combat animations and the announcement "More" button by mashing the movement keys
