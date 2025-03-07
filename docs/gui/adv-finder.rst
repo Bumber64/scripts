@@ -71,10 +71,10 @@ Dead figures generally can't be encountered at all, and they take their items
 with them if they weren't separated properly by worldgen. The coord given is
 usually a death or abstract burial location, but the corpse isn't guaranteed to
 exist. Generally, wilderness and underground locations only have coords if you
-left something there in adventure mode. Anything lost during worldgen or a fort
-mode mission likely can't be located. Anything in a site is usually a safe bet,
-but sometimes items won't load. (Fort missions can be used to acquire these for
-later retrieval, however.) Traveling targets are always valid.
+left something there in adventure mode. Anything lost there during worldgen or a
+fort mode mission likely can't be located. Anything in a site is usually a safe
+bet, but sometimes items won't load. (Fort missions can be used to acquire these
+for later retrieval, however.) Traveling targets are always valid.
 
 Usage
 -----
