@@ -97,7 +97,7 @@ Examples
     already.
 ``gui/adv-finder --debug``
     Display selected target IDs in the finder window title bar. Finder will be
-    opened if not already. Setting isn't saved, so it can be disabled by
+    opened if not already. This setting isn't saved, so it can be disabled by
     invoking ``gui/adv-finder`` again without the option.
 
 Options
@@ -106,7 +106,7 @@ Options
 ``-h``, ``--histfig <id>``
     Set the target to the historical figure with the given ID.
 ``-a``, ``--artifact <id>``
-    Set the target to the artifact record with the given ID. Not an item ID!
+    Set the target to the artifact record with the given ID. (Not an item ID!)
 ``-d``, ``--debug``
     Display selected target IDs in the finder window title bar. Doesn't persist
     between invocations.
