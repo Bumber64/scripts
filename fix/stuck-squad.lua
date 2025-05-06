@@ -2,7 +2,6 @@
 --@ module=true
 
 local argparse = require('argparse')
-
 local plotinfo = df.global.plotinfo
 
 function new_controller(site_id) --Create army controller aimed at site
