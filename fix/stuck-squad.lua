@@ -77,7 +77,7 @@ end
 --From observing bugged saves, this condition appears to be unique to stuck armies
 local function is_army_stuck(army)
     return army and not army.flags.dwarf_mode_preparing and --Let DF handle cancelled missions
-        army.controller_id ~= 0 and not army.controller --TODO: why 0?
+        army.controller_id ~= 0 and not army.controller
 end
 
 function scan_fort_armies(govt) --Return a list of all squad armies that are stuck
