@@ -26,7 +26,9 @@ Usage
 
     fix/stuck-squad [<options>]
 
-Fix stuck squads and direct their armies back home.
+Fix stuck squads and direct their armies back home. Multiple squads can share
+a single army if sent on the same mission, and only armies are counted in the
+total.
 
 Examples
 --------
