@@ -20,7 +20,7 @@ of ranges for minecart and creature triggers is provided, allowing greater
 precision than the game interface normally permits. Incrementing or decrementing
 values always restricts them to the usual intervals.
 
-The ``gearassembly` overlay allows the player to toggle the engaged state of
+The ``gearassembly`` overlay allows the player to toggle the engaged state of
 a selected gear assembly without linking it to a lever first. This is useful
 for dwarfputing and other applications where it may be desirable to default to
 the disengaged state until triggered.
