@@ -3,7 +3,7 @@ machine-toggle
 
 .. dfhack-tool::
     :summary: Overlay to modify pressure plates and gear assemblies after construction.
-    :tags: armok fort buildings interface
+    :tags: fort armok buildings interface
 
 This script provides 2 overlays that are managed by the `overlay` framework.
 The script does nothing when executed.
