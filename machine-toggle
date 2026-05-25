@@ -32,7 +32,7 @@ PlateOverlay = defclass(PlateOverlay, overlay.OverlayWidget)
 PlateOverlay.ATTRS{
   desc='Adds widgets for reconfiguring pressure plates after construction.',
   default_pos={x=-54, y=32},
-  version=2,
+  version=1,
   default_enabled=true,
   viewscreens='dwarfmode/ViewSheets/BUILDING/Trap/PressurePlate',
   frame={w=44, h=7},
@@ -345,7 +345,7 @@ GearOverlay = defclass(GearOverlay, overlay.OverlayWidget)
 GearOverlay.ATTRS{
   desc='Adds widget for toggling gear assemblies.',
   default_pos={x=-83, y=32},
-  version=2,
+  version=1,
   default_enabled=true,
   viewscreens='dwarfmode/ViewSheets/BUILDING/GearAssembly',
   frame={w=15, h=3},
