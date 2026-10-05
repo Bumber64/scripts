@@ -1,4 +1,4 @@
-if gamemode ~= df.game_mode.ADVENTURER then
+if df.global.gamemode ~= df.game_mode.ADVENTURE then
     qerror('This script must be used in adventure mode or the arena!')
 end
 
